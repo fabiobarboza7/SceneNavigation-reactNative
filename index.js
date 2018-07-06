@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  StatusBar
 } from 'react-native';
+import { Navigator } from 'react-native-deprecated-custom-components';
 
 // importar o componente barra de navegação
-import BarraNavegacao from './src/components/BarraNavegacao';
+import CenaPrincipal from './src/components/CenaPrincipal';
+import CenaClientes from './src/components/CenaClientes';
 
 
 export default class App extends Component {
   render() {
     return (
-      <View>
-        <StatusBar
-          // hidden // true if false need to set ={false}
-          backgroundColor="#ccc"
-        />
-        <BarraNavegacao />
-      </View>
+      <Navigator
+        initialRoute={{ id: 'a' }}
+        renderScene={(route, navigator) => {
+          if (route.id === 'a') {
+            return (<CenaPrincipal navigator={navigator} />);
+          }
+
+          if (route.id === 'b') {
+            return (<CenaClientes navigator={navigator} />);
+          }
+        }}
+      />
     );
   }
 }
